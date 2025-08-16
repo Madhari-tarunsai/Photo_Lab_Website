@@ -2,18 +2,28 @@ const express=require("express")
 const dotenv=require("dotenv").config()
 const Connectedb=require("./Config/Database")
 const router=require("./Router/PostRouter")
+const path = require("path");
+const adminRouter = require("./Router/AdminRouter");
 const app=express()
 
-// database calling
-Connectedb()
-
-// router_api
-app.use("/api/router",router)
 
 
 // Middleware
 app.use(express.json())
 app.use(express.urlencoded())
+
+
+// database calling
+Connectedb()
+
+
+// router_api
+app.use("/api/admin", adminRouter);
+app.use("/api/router",router)
+
+// Static folder for uploads
+// app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // simple_api for wroking
 app.get("/",(req,res)=>{

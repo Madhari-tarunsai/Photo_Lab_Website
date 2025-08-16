@@ -1,4 +1,4 @@
-const photoData = require('../Models/Postdetails'); 
+const photoData = require('../Models/Postdetails');
 
 // GET all photos
 const getDetails = async (req, res) => {
@@ -14,7 +14,16 @@ const getDetails = async (req, res) => {
 // POST new photo
 const postDetails = async (req, res) => {
     try {
-        const postData = await photoData.create(req.body);
+        const { title, des, cost } = req.body;
+        const imagePath = req.file ? req.file.filename : null;
+
+        const postData = await photoData.create({
+            title,
+            des,
+            cost,
+            image: imagePath
+        });
+
         res.status(201).json({ message: "Post created successfully", data: postData });
     } catch (error) {
         console.log(error);
@@ -26,7 +35,12 @@ const postDetails = async (req, res) => {
 const updateDetails = async (req, res) => {
     try {
         const { id } = req.params;
-        const updated = await photoData.findByIdAndUpdate(id, req.body, { new: true });
+        const imagePath = req.file ? req.file.filename : null;
+
+        const updatedData = { ...req.body };
+        if (imagePath) updatedData.image = imagePath;
+
+        const updated = await photoData.findByIdAndUpdate(id, updatedData, { new: true });
         if (!updated) return res.status(404).json({ message: "Photo not found" });
         res.status(200).json({ message: "Photo updated successfully", data: updated });
     } catch (error) {
