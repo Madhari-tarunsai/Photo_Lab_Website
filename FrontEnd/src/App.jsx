@@ -1,28 +1,35 @@
-import React from 'react';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { Route, Routes } from 'react-router-dom';
-import AdminLogin from './Pages/Dashboard/Login/AdminLogin';
-import AdminRegister from './Pages/Dashboard/Register/AdminRegister';
-import Homebar from './Pages/Admindashboard/HomeBar/Homebar';
-import Postdetails from './Postdetails/Postdetails';
-// import Homepage from './Pages/Admindashboard/Homepage/Homepage';
+import "react-toastify/dist/ReactToastify.css";
+
+import PublicLayout from "./Layouts/PulicLayout";
+import AdminLayout from "./Layouts/AdminLayout";
+
+import Home from "./Dashboards/UserdashBoard/Home/Home"; // Import Home
+import AdminLogin from "./Pages/Login/AdminLogin";
+import AdminRegister from "./Pages/Register/AdminRegister";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Routes>
-        {/* Public Routes */}
-        <Route path="/login" element={<AdminLogin />} />
-        <Route path="/register" element={<AdminRegister />} />
+        {/* Public routes */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} /> 
+          {/* You can add more public pages like About, Services, etc. here */}
+        </Route>
 
-        {/* Dashboard Layout with nested routes */}
-        <Route path="/dashboard" element={<Homebar />}/>
-        <Route path='dashboard/posts' element={<Postdetails/>}/>
+        {/* Admin routes */}
+        <Route path="/admin">
+          <Route path="login" element={<AdminLogin />} />
+          <Route path="register" element={<AdminRegister />} />
+          <Route path="dashboard" element={<AdminLayout />} />
+        </Route>
       </Routes>
 
-      {/* Toast notifications */}
       <ToastContainer position="top-right" autoClose={2000} />
-    </div>
+    </>
   );
 };
 
