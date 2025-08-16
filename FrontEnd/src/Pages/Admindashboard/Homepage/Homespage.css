@@ -1,0 +1,56 @@
+/* General Page Styling */
+.homepage {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+/* Hero Section */
+.hero {
+  background-color: antiquewhite;
+  color: black;
+  padding: -3px;
+
+  /* 👇 Center content both vertically & horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh; /* full screen */
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  animation: slideDown 1.2s ease-in-out;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .portraits {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 90%;
+  }
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}

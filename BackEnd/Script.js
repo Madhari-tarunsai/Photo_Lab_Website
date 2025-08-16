@@ -3,8 +3,18 @@ const dotenv=require("dotenv").config()
 const Connectedb=require("./Config/Database")
 const router=require("./Router/PostRouter")
 const path = require("path");
+const cors = require('cors');
 const adminRouter = require("./Router/AdminRouter");
 const app=express()
+
+
+// CORS Middleware
+app.use(cors({
+    origin: 'http://localhost:5173', // React app URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+
+}));
 
 
 

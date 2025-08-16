@@ -23,6 +23,7 @@ const registerAdmin = async (req, res) => {
         });
 
         res.status(201).json({ message: "Admin registered successfully", admin: newAdmin });
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Something went wrong", error });
@@ -48,6 +49,7 @@ const loginAdmin = async (req, res) => {
         );
 
         res.status(200).json({ message: "Login successful", token });
+        
     } catch (error) {
         console.error(error);
         console.error("Login error:", error.message);
